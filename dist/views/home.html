@@ -1,0 +1,97 @@
+<div class="container conteudo">
+    <div class="row">
+        <div class="col-xs-8">
+            <button type="button" class="btn btn-success novo-carro" ng-click="hCtrl.modalSalvar()">Novo Carro</button>
+            <button type="button" class="btn btn-warning editar-carro" ng-click="hCtrl.modalEditar()" ng-if="hCtrl.qtdeCheck == 1">Editar Carro</button>
+            <button type="button" class="btn btn-danger excluir-carro" ng-click="hCtrl.excluir()" ng-if="hCtrl.qtdeCheck > 0" ng-bind="(hCtrl.qtdeCheck == 1) ? 'Excluir carro' : 'Excluir carros'"></button>
+        </div>
+        <div class="col-xs-offset-1 col-xs-3">
+            <div class="form-group">
+                <div class="input-group">
+                    <input type="search" ng-model="hCtrl.pesquisa" class="form-control input-pesquisar" placeholder="Pesquisar">
+                    <div class="input-group-addon bt-pesquisar" ng-click="hCtrl.pesquisar(hCtrl.pesquisa)"><span class="glyphicon glyphicon-search"></span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-12">
+            <table class="table table-hover">
+                <tr>
+                    <th>
+                        <input type="checkbox" id="checkbox-0" class="checkbox-custom" ng-model="hCtrl.selectedAll" ng-click="hCtrl.checkAll()">
+                        <label for="checkbox-0" class="checkbox-custom-label"></label>
+                    </th>
+                    <th>Placa</th>
+                    <th>Modelo</th>
+                    <th>Marca</th>
+                    <th>Foto</th>
+                    <th>Combustível</th>
+                    <th>Valor</th>
+                </tr>
+                <tr ng-repeat="veiculo in hCtrl.listaVeiculos.slice(((hCtrl.currentPage-1)*hCtrl.itemsPerPage), ((hCtrl.currentPage)*hCtrl.itemsPerPage))">
+                    <td>
+                        <input type="checkbox" id="checkbox-{{$index + 1}}" class="checkbox-custom" ng-model="veiculo.select" ng-change="hCtrl.checkCheckAll()">
+                        <label for="checkbox-{{$index + 1}}" class="checkbox-custom-label"></label>
+                    </td>
+                    <td ng-bind="veiculo.placa | placaFilter"></td>
+                    <td ng-bind="veiculo.modelo"></td>
+                    <td ng-bind="veiculo.marca"></td>
+                    <td ng-if="!veiculo.imagem">Sem foto</td>
+                    <td ng-if="veiculo.imagem">
+                        <a href="{{veiculo.imagem}}" target="_blank">Imagem</a>
+                    </td>
+                    <td ng-bind="veiculo.combustivel"></td>
+                    <td ng-bind="veiculo.valor | currency:''"></td>
+                </tr>
+            </table>
+            <div class="row">
+                <div class="col-xs-12 centralizado">
+                    <div uib-pagination boundary-links="true" direction-links="false" total-items="hCtrl.qtdeTotalVeiculos" ng-model="hCtrl.currentPage"
+                        max-size="hCtrl.maxSize" items-per-page="hCtrl.itemsPerPage" class="pagination-md" first-text="&laquo;"
+                        last-text="&raquo;" ng-click="hCtrl.checkCheckAll()"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/ng-template" id="ModalVeiculo.html">
+    <div class="modal-header">
+        <h3 class="modal-title" id="modal-title" ng-bind="(mCtrl.acao == 'editar') ? 'Editar Carro' : 'Novo Carro'"></h3>
+    </div>
+    <div class="modal-body" id="modal-body">
+        <form name="veiculo" class="row">
+            <div class="col-xs-12">
+                <div class="col-xs-2 form-group">
+                    <label for="placa">Placa *</label>
+                    <input type="text" id="placa" class="form-control" ng-model="mCtrl.veiculo.placa" ui-br-car-plate-mask required />
+                </div>
+                <div class="col-xs-5 form-group">
+                    <label for="marca">Marca *</label>
+                    <input type="text" id="marca" class="form-control" ng-model="mCtrl.veiculo.marca" required />
+                </div>
+                <div class="col-xs-5 form-group">
+                    <label for="modelo">Modelo *</label>
+                    <input type="text" id="modelo" class="form-control" ng-model="mCtrl.veiculo.modelo" required />
+                </div>
+                <div class="col-xs-5 form-group">
+                    <label for="imagem">Imagem</label>
+                    <input type="text" id="imagem" class="form-control" ng-model="mCtrl.veiculo.imagem" />
+                </div>
+                <div class="col-xs-3 form-group">
+                    <label class="md-placeholder">Combustível</label>
+                    <select class="form-control" ng-model="mCtrl.veiculo.combustivel" ng-options="valor for valor in mCtrl.tipoCombustivel"></select>
+                </div>
+                <div class="col-xs-4 form-group">
+                    <label for="valor">Valor</label>
+                    <input type="text" id="valor" class="form-control" ng-model="mCtrl.veiculo.valor" ui-money-mask />
+                </div>
+            </div>
+        </form>
+    </div>
+    <cite class="col-xs-3">* Campo obrigatório</cite>
+    <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="mCtrl.ok()" ng-disabled="veiculo.$invalid">Salvar</button>
+        <button class="btn btn-warning" type="button" ng-click="mCtrl.cancel()">Cancelar</button>
+    </div>
+</script>

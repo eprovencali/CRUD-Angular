@@ -1,0 +1,214 @@
+@font-face {
+    font-family:fontello;
+    src: url("../fonts/fontello.eot?42160437");
+    src: url("../fonts/fontello.eot?42160437#iefix") format('embedded-opentype'),
+         url("../fonts/fontello.woff?42160437") format('woff'),
+         url("../fonts/fontello.ttf?42160437") format('truetype'),
+         url("../fonts/fontello.svg?42160437#fontello") format('svg');
+    font-weight: 200;
+    font-style: normal
+}
+[class*=" icon-"]:before,
+[class^=icon-]:before{
+    font-family:fontello;
+    font-style:normal;
+    font-weight:400;
+    speak:none;
+    display:inline-block;
+    text-decoration:inherit;
+    margin-right:.2em;
+    text-align:center;
+    font-variant:normal;
+    text-transform:none;
+    line-height:1em;
+    margin-left:.2em;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+}
+
+.icon-logo_contaazul:before{content:'\e80e'}
+
+@cor_branco: #FFFFFF;
+@cor_azul1: #F1F4F9;
+@cor_azul2: #F8FAFC;
+@cor_azul3: #D8E9FB;
+@cor_azul4: #2687E9;
+@cor_azul5: #F8FAFC;
+@cor_azul6: #8BC8F6;
+@cor_verde: #4ABA58;
+@cor_cinza1: #C9D3DD;
+@cor_cinza2: #dddddd;
+@cor_cinza3: #605E8B;
+@cor_preto: #000000;
+@cor_vermelho1: #fffAEB;
+
+@media (min-width: 1200px) {
+  .container {
+    width: 1054px;
+  }
+}
+
+body {
+    background-color: @cor_azul1;
+    .container {
+        padding-left: 15px;
+        min-height: 700px;
+        & .header {
+            background-color: @cor_azul4;
+            height: 50px;
+            & .navbar-brand {
+                margin-left: 10px;
+                margin-top: -2px;
+                & .icon-logo_contaazul {
+                    color: @cor_branco;
+                    font-size: 14.2px;
+                    text-rendering: optimizeLegibility;
+                }
+            }
+        }
+        & .conteudo {
+            padding-top: 69px;
+            width: 968px;
+            & .novo-carro,
+              .editar-carro,
+              .excluir-carro {
+                font-size: 13px;
+                height: 40px;
+                width: 140px;              
+            }
+            & .input-pesquisar {
+                border-color: @cor_cinza1;
+                font-size: 13px;
+                height: 40px;
+                &::-webkit-input-placeholder {
+                    color: #bbb;
+                }
+                &:-ms-input-placeholder {
+                    color: #bbb;
+                }
+            }
+            & .input-group-addon {
+                background-color: @cor_azul1;
+                border-color: @cor_cinza1;
+                &.bt-pesquisar {
+                    cursor: pointer;
+                }
+                & .glyphicon-search {
+                    font-size: 12px;
+                }
+            }
+            & .table {
+                background-color: @cor_branco;
+                border-bottom: 1px solid @cor_cinza2;
+                color: @cor_cinza3;
+                margin-top: 4px;
+                & tr {
+                    border-left: 1px solid @cor_cinza2;
+                    border-right: 1px solid @cor_cinza2;
+                    & th {
+                        background-color: @cor_azul5;
+                        font-size: 12px;
+                        height: 40px;
+                        vertical-align: middle;
+                        
+                    }
+                    & td {
+                        height: 50px;
+                        vertical-align: middle;
+                    }
+                }
+                &.table-hover > tbody > tr:hover {
+                    background-color: @cor_azul3;
+                    border-color: @cor_azul6;
+                }
+                & th:first-child {
+                    width: 36px;
+                }
+                & td:last-child,
+                  th:last-child {
+                    text-align: right;
+                    padding-right: 50px;
+                    width: 80px;
+                }
+            }
+        }
+    
+        & .centralizado {
+            text-align: center;
+            margin: 0 auto;
+        }
+        & .checkbox-custom {
+            display: none;
+        }
+        & .checkbox-custom-label {
+            display: inline-block;
+            position: relative;
+            vertical-align: middle;
+            margin: 0 5px;
+            cursor: pointer;
+        }
+        & .checkbox-custom + .checkbox-custom-label:before {
+            content: '';
+            background: @cor_branco;
+            border-radius: 3px;
+            border: 1px solid @cor_cinza2;
+            display: inline-block;
+            vertical-align: middle;
+            width: 20px;
+            height: 20px;
+            padding: 2px;
+            text-align: center;
+        }
+        & .checkbox-custom:checked + .checkbox-custom-label:after {
+            content: "";
+            padding: 2px;
+            text-align: center;
+            position: absolute;
+            width: 1px;
+            height: 10px;
+            border: solid @cor_preto;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+            -ms-transform: rotate(45deg);
+            top: 5px;
+            left: 7px;
+        }
+        & .pagination{
+            margin-top: 10px;
+            &  > li > a{
+                height: 40px;
+                width: 40px;
+                line-height: 1.8;  
+                color: @cor_cinza3; 
+            }
+
+            & > li:not(.active) > a:hover, 
+            > li:not(.active) > span:hover, 
+            > li:not(.active) > a:focus, 
+            > li:not(.active) > span:focus{
+                background-color: @cor_vermelho1;
+                cursor:default; 
+                color: @cor_cinza3;
+            }
+            & > .active > a, 
+            > .active > span, 
+            > .active > a:hover, 
+            > .active > span:hover, 
+            > .active > a:focus, 
+            > .active > span:focus{
+                background-color: @cor_azul3;
+                border-color: @cor_azul6;
+                color: @cor_cinza3;
+            }
+
+            & > li.pagination-first > a,
+            > li.pagination-last > a {
+                font-size: 22px;
+                font-weight: bold;
+                line-height: 1.1;  
+                color: @cor_cinza3;           
+            }
+        }
+    }
+}

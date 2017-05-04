@@ -150,23 +150,49 @@ angular.module("ngLocale", [], ["$provide", function ($provide) {
 }]);
 angular.module("underscore", ["underscore"]);
 (function () {
-
     "use strict";
-    
-    angular.module("app.module").controller("mainCtrl", mainCtrl);
 
-    mainCtrl.$inject = [];
+    angular.module("app.module").filter("pesquisarFilter", pesquisarFilter);
+
+    pesquisarFilter.$inject = ["$filter", "_"];
 
     /**
-     * @ngdoc controller
-     * @name mainCtrl
-     * @module app.module
-     * @description Controller da página mainCtrl.html
-     */
-    function mainCtrl() {
-        
+    * @ngdoc filter
+    * @name groupBy
+    * @module app.module
+    * @description Filtro que retorna array de objetos retornados de acordo com o valor passado
+    * @param {string} array array que será pesquisado
+    * @param {string} valor Valor a ser procurado 
+    **/
+    function pesquisarFilter($filter, _) {
+        return function (array, valor) {
+            var array_matches = [];
+            array_matches.push($filter("filter")(array, { combustivel: valor }));
+            array_matches.push($filter("filter")(array, { marca: valor }));
+            return _.uniq(_.flatten(array_matches));
+        };
     }
-})();
+})(); 
+(function () {
+    "use strict";
+
+    angular.module("app.module").filter("placaFilter", placaFilter);
+
+    placaFilter.$inject = ["$filter", "_"];
+
+    /**
+    * @ngdoc filter
+    * @name groupBy
+    * @module app.module
+    * @description Filtro que retorna placa somente com letras e números
+    * @param {string} placa placa a ser tratada
+    **/
+    function placaFilter() {
+        return function (placa) {
+            return placa.replace(/[^a-zA-Z0-9]/g, "").slice(0, 7);
+        };
+    }
+})(); 
 (function () {
 
     "use strict";
@@ -230,46 +256,20 @@ angular.module("underscore", ["underscore"]);
 
 })();
 (function () {
+
     "use strict";
+    
+    angular.module("app.module").controller("mainCtrl", mainCtrl);
 
-    angular.module("app.module").filter("pesquisarFilter", pesquisarFilter);
-
-    pesquisarFilter.$inject = ["$filter", "_"];
+    mainCtrl.$inject = [];
 
     /**
-    * @ngdoc filter
-    * @name groupBy
-    * @module app.module
-    * @description Filtro que retorna array de objetos retornados de acordo com o valor passado
-    * @param {string} array array que será pesquisado
-    * @param {string} valor Valor a ser procurado 
-    **/
-    function pesquisarFilter($filter, _) {
-        return function (array, valor) {
-            var array_matches = [];
-            array_matches.push($filter("filter")(array, { combustivel: valor }));
-            array_matches.push($filter("filter")(array, { marca: valor }));
-            return _.uniq(_.flatten(array_matches));
-        };
+     * @ngdoc controller
+     * @name mainCtrl
+     * @module app.module
+     * @description Controller da página mainCtrl.html
+     */
+    function mainCtrl() {
+        
     }
-})(); 
-(function () {
-    "use strict";
-
-    angular.module("app.module").filter("placaFilter", placaFilter);
-
-    placaFilter.$inject = ["$filter", "_"];
-
-    /**
-    * @ngdoc filter
-    * @name groupBy
-    * @module app.module
-    * @description Filtro que retorna placa somente com letras e números
-    * @param {string} placa placa a ser tratada
-    **/
-    function placaFilter() {
-        return function (placa) {
-            return placa.replace(/[^a-zA-Z0-9]/g, "").slice(0, 7);
-        };
-    }
-})(); 
+})();
