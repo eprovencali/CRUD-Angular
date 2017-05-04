@@ -1,6 +1,6 @@
-#CRUD-Angular
+# CRUD-Angular
 
-##Como executar
+## Como executar
 
 Baixar o projeto, executar o commando 'node dist/server.js' para ativar o servidor localmente.
  
