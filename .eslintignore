@@ -1,0 +1,7 @@
+./*.js
+./assets/**/*.js
+./dist/**/*.js
+./node_modules/**/*.js
+./reports/**/*.js
+
+
