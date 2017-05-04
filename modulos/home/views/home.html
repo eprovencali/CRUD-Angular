@@ -29,7 +29,7 @@
                     <th>Combustível</th>
                     <th>Valor</th>
                 </tr>
-                <tr ng-repeat="veiculo in hCtrl.listaVeiculos.slice(((hCtrl.currentPage-1)*hCtrl.itemsPerPage), ((hCtrl.currentPage)*hCtrl.itemsPerPage)) track by veiculo.placa">
+                <tr ng-repeat="veiculo in hCtrl.listaVeiculos.slice(((hCtrl.currentPage-1)*hCtrl.itemsPerPage), ((hCtrl.currentPage)*hCtrl.itemsPerPage)) track by veiculo.placa | orderBy: 'placa'">
                     <td>
                         <input type="checkbox" id="checkbox-{{$index + 1}}" class="checkbox-custom" ng-model="veiculo.select" ng-change="hCtrl.checkCheckAll(); hCtrl.seleciona($index, veiculo.select)">
                         <label for="checkbox-{{$index + 1}}" class="checkbox-custom-label"></label>

@@ -7,7 +7,7 @@
 
     /**
     * @ngdoc filter
-    * @name groupBy
+    * @name pesquisarFilter
     * @module app.module
     * @description Filtro que retorna array de objetos retornados de acordo com o valor passado
     * @param {string} array array que será pesquisado

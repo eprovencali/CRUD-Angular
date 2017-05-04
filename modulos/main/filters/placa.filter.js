@@ -7,7 +7,7 @@
 
     /**
     * @ngdoc filter
-    * @name groupBy
+    * @name placaFilter
     * @module app.module
     * @description Filtro que retorna placa somente com letras e números
     * @param {string} placa placa a ser tratada
